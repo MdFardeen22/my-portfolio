@@ -149,6 +149,8 @@ const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin-top: 20px;
 
   .form-container {
@@ -169,7 +171,8 @@ const StyledWrapper = styled.div`
 
   @media (max-width: 768px) {
     .form-container {
-      padding: 30px 16px;
+      padding: 24px 16px;
+      width: 100%;
     }
   }
 
