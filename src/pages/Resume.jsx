@@ -1,27 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
+import "./Resume.css";
 
 export default function Resume() {
   return (
-    <section className="container" style={{ padding: "60px 0" }}>
+    <section className="container resume-page">
       <motion.div
-        className="card"
+        className="resume-card"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        style={{
-          background: "#0b0b0b",
-          borderRadius: 16,
-          padding: "40px 30px",
-          color: "#e5e5e5",
-          boxShadow: "0 0 25px rgba(0, 153, 255, 0.1)",
-        }}
       >
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          style={{ fontSize: 28, color: "#00b4ff", marginBottom: 12 }}
+          style={{ fontSize: 28, color: "#00b4ff", marginTop: 0, marginBottom: 12 }}
         >
           📄 Resume
         </motion.h2>
@@ -152,6 +146,7 @@ export default function Resume() {
               "React Native",
               "Node.js",
               "Spring Boot",
+              "Hibernate",
               "REST APIs",
               "MySQL",
               "Git",
@@ -175,15 +170,10 @@ export default function Resume() {
           </div>
         </motion.div>
         <motion.div
+          className="resume-links"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4 }}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 30,
-            marginTop: 40,
-          }}
         >
           {[
             { name: "💻 GitHub", link: "https://github.com/MdFardeen22" },
@@ -238,19 +228,20 @@ export default function Resume() {
           download
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          style={{
-            display: "inline-block",
-            marginTop: 20,
-            background: "#00b4ff",
-            color: "#fff",
-            padding: "10px 22px",
-            borderRadius: 8,
-            textDecoration: "none",
-            fontWeight: 500,
-            letterSpacing: 0.3,
-          }}
+          className="download-btn"
         >
-          ⬇️ Download Resume
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24px" width="24px">
+            <g strokeWidth={0} id="SVGRepo_bgCarrier" />
+            <g id="SVGRepo_iconCarrier">
+              <g id="Interface / Download">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth={2} stroke="currentColor" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" id="Vector" />
+              </g>
+            </g>
+          </svg>
+          Download
+          <div className="download-tooltip">
+            Download
+          </div>
         </motion.a>
 
 

@@ -1,17 +1,11 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 import "./Home.css"
 import '../index.css'
-
+import SocialIcons from '../components/SocialIcons'
 
 // 🖼️ Import Assets
 import photo from '../../public/photo.jpg'
-import githubLogo from '../../public/github.png'
-import linkedinLogo from '../../public/linkedin.png'
-import gmailLogo from '../../public/gmail.png'
-import whatsappLogo from '../../public/whatsapp.png'
-import instagramLogo from '../../public/insta.png'
-import facebookLogo from '../../public/facebook.png'
 
 export default function Home() {
   const professions = [
@@ -22,21 +16,12 @@ export default function Home() {
     'React Native Developer'
   ]
 
-  const quickLinks = [
-    { img: githubLogo, title: 'GitHub', link: 'https://github.com/MdFardeen22' },
-    { img: linkedinLogo, title: 'LinkedIn', link: 'https://linkedin.com/in/fardeenmd' },
-    { img: gmailLogo, title: 'Email', link: 'mailto:fardeenmd63@gmail.com' },
-    { img: whatsappLogo, title: 'WhatsApp', link: 'https://wa.me/+918210925645' },
-    { img: instagramLogo, title: 'Instagram', link: 'https://www.instagram.com/_fardeen_qureshi' },
-    { img: facebookLogo, title: 'Facebook', link: 'https://www.facebook.com/mdfardeen.quraishi' },
-  ]
-
   return (
     <section className="home-section">
       {/* Typing Effect Styles */}
       <style>
         {`
-          @keyframes typing { from { width: 0; } to { width: 100%; } }
+          @keyframes typing { from { max-width: 0; } to { max-width: 100%; } }
           @keyframes blink { 50% { border-color: transparent; } }
         `}
       </style>
@@ -97,7 +82,7 @@ export default function Home() {
           {/* Profession Tags */}
           <motion.div className="profession-tags">
             {professions.map((role, i) => (
-              <motion.div key={i} whileHover={{ scale: 1.05, background: 'linear-gradient(90deg,var(--accent),var(--accent-2))' }} transition={{ type: 'spring', stiffness: 200 }} className="profession-tag">
+              <motion.div key={i} whileHover={{ scale: 1.04, background: 'linear-gradient(90deg,var(--accent),var(--accent-2))',color:"black"}} transition={{ type: 'spring', stiffness: 200 }} className="profession-tag">
                 {role}
               </motion.div>
             ))}
@@ -123,24 +108,7 @@ export default function Home() {
       <motion.div className="quick-links">
         <h2 className="quick-links-title">Connect with me</h2>
         <div className="quick-links-list">
-          {quickLinks.map((item, i) => (
-            <motion.a
-              key={i}
-              href={item.link}
-              title={item.title}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              transition={{ type: 'spring', stiffness: 250 }}
-            >
-              <motion.img
-                src={item.img}
-                alt={item.title}
-                whileHover={{ filter: 'drop-shadow(0 0 15px var(--accent)) brightness(1.2)' }}
-                className="quick-link-img"
-              />
-            </motion.a>
-          ))}
+          <SocialIcons />
         </div>
       </motion.div>
 

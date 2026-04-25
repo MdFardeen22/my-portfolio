@@ -14,20 +14,18 @@ const links = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showButton, setShowButton] = useState(false);
   const navRef = useRef(null);
   const linksRef = useRef(null);
 
-  // Check if links overflow nav width (to show hamburger)
-  const checkOverflow = () => {
-    if (!navRef.current || !linksRef.current) return;
-    setShowButton(linksRef.current.scrollWidth > navRef.current.offsetWidth);
-  };
-
   useEffect(() => {
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    return () => window.removeEventListener("resize", checkOverflow);
+    // Close mobile menu on resize if screen becomes larger
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -50,19 +48,28 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <NavLink 
+          to="/" 
+          style={{ 
+            display: "flex", 
+            alignItems: "center", 
+            gap: 12, 
+            textDecoration: "none",
+            color: "inherit" 
+          }}
+        >
           <motion.div
             className="logo"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.4rem",
-              color: "var(--accent)",
-            }}
+            style={{ display: "flex", alignItems: "center" }}
           >
-            MF
+            <img 
+              src="/MFlogo.png" 
+              alt="MF Logo" 
+              style={{ width: "50px", height: "auto", objectFit: "contain" }} 
+            />
           </motion.div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <h1 style={{ margin: 0, fontSize: 14 }}>Md Fardeen</h1>
@@ -70,13 +77,13 @@ export default function Navbar() {
               Software Engineer
             </div>
           </div>
-        </div>
+        </NavLink>
 
         {/* Desktop links */}
         <div
           ref={linksRef}
+          className="desktop-links"
           style={{
-            display: showButton ? "none" : "flex",
             justifyContent: "center",
             gap: "2rem",
             alignItems: "center",
@@ -139,83 +146,118 @@ export default function Navbar() {
         </div>
 
         {/* Hamburger */}
-        {showButton && (
-          <div className="mobile-btn">
-            <button
-              style={{
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: "1.8rem",
-                cursor: "pointer",
-                zIndex: 10000,
-              }}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? "✕" : "☰"}
-            </button>
-          </div>
-        )}
+        <div className="mobile-btn">
+          <button
+            style={{
+              background: "none",
+              border: "none",
+              color: "#fff",
+              fontSize: "1.8rem",
+              cursor: "pointer",
+              zIndex: 10000,
+            }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "✕" : "☰"}
+          </button>
+        </div>
       </nav>
 
       {/* --- Mobile Dropdown Menu --- */}
       <AnimatePresence>
-        {isOpen && showButton && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100vh",
-              background: "rgba(0,0,0,0.95)",
-              backdropFilter: "blur(12px)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              paddingTop: "4rem",
-              overflowY: "auto",
-              zIndex: 9999,
-            }}
-          >
-            <button
-              style={{
-                position: "absolute",
-                top: "1rem",
-                right: "1rem",
-                fontSize: "2rem",
-                color: "#fff",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-              }}
+        {isOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100vh",
+                background: "rgba(0, 0, 0, 0.5)",
+                backdropFilter: "blur(5px)",
+                zIndex: 9998,
+              }}
+            />
+            
+            {/* Sidebar Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              style={{
+                position: "fixed",
+                top: 0,
+                right: 0,
+                width: "75%",
+                maxWidth: "320px",
+                height: "100vh",
+                background: "rgba(10, 12, 18, 0.95)",
+                backdropFilter: "blur(20px)",
+                borderLeft: "1px solid rgba(0, 180, 255, 0.2)",
+                boxShadow: "-10px 0 30px rgba(0, 180, 255, 0.1)",
+                display: "flex",
+                flexDirection: "column",
+                padding: "2rem 1.5rem",
+                overflowY: "auto",
+                zIndex: 9999,
+              }}
             >
-              ✕
-            </button>
+              {/* Sidebar Header */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2.5rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <img src="/MFlogo.png" alt="MF Logo" style={{ width: "35px" }} />
+                  <span style={{ fontSize: "1.2rem", fontWeight: "bold", color: "var(--accent)" }}>Menu</span>
+                </div>
+                <button
+                  style={{
+                    fontSize: "1.8rem",
+                    color: "#fff",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  ✕
+                </button>
+              </div>
 
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                onClick={() => setIsOpen(false)}
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                  padding: "1rem 0",
-                  width: "100%",
-                  textAlign: "center",
-                  fontSize: 16,
-                  borderBottom: "1px solid rgba(255,255,255,0.05)",
-                }}
-              >
-                {l.label}
-              </NavLink>
-            ))}
-          </motion.div>
+              {/* Sidebar Links */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {links.map((l) => (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    onClick={() => setIsOpen(false)}
+                    style={({ isActive }) => ({
+                      display: "block",
+                      color: isActive ? "var(--accent)" : "rgba(255, 255, 255, 0.85)",
+                      textDecoration: "none",
+                      padding: "1rem 1.2rem",
+                      fontSize: "1.1rem",
+                      fontWeight: isActive ? "600" : "500",
+                      background: isActive ? "rgba(0, 180, 255, 0.08)" : "transparent",
+                      borderLeft: isActive ? "3px solid var(--accent)" : "3px solid transparent",
+                      borderRadius: "0 8px 8px 0",
+                      transition: "all 0.3s ease",
+                    })}
+                  >
+                    {l.label}
+                  </NavLink>
+                ))}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

@@ -51,41 +51,65 @@ export default function Skills() {
     const stage = stageRef.current;
     if (!stage) return;
     const circles = Array.from(stage.querySelectorAll(".skill-circle"));
-    const rect = stage.getBoundingClientRect();
-    const placed = [];
+    
+    let resizeTimer;
+    const positionCircles = () => {
+      const rect = stage.getBoundingClientRect();
+      const placed = [];
 
-    const isOverlapping = (x, y, size) =>
-      placed.some((p) => {
-        const dx = p.x - x;
-        const dy = p.y - y;
-        return Math.sqrt(dx * dx + dy * dy) < p.size / 2 + size / 2 + 40;
-      });
+      const isOverlapping = (x, y, size) =>
+        placed.some((p) => {
+          const dx = p.x - x;
+          const dy = p.y - y;
+          // Use smaller gap on mobile
+          const gap = window.innerWidth < 768 ? 10 : 40;
+          return Math.sqrt(dx * dx + dy * dy) < p.size / 2 + size / 2 + gap;
+        });
 
-    circles.forEach((circle) => {
-      const size = circle.offsetWidth;
-      let x, y, tries = 0;
-      do {
-        x = Math.random() * (rect.width - size - 20);
-        y = Math.random() * (rect.height - size - 20);
-        tries++;
-      } while (isOverlapping(x, y, size) && tries < 150);
+      circles.forEach((circle) => {
+        const size = circle.offsetWidth;
+        let x, y, tries = 0;
+        do {
+          x = Math.random() * Math.max(0, rect.width - size - 10);
+          y = Math.random() * Math.max(0, rect.height - size - 10);
+          tries++;
+        } while (isOverlapping(x, y, size) && tries < 150);
 
-      placed.push({ x, y, size });
-      circle.style.left = `${x}px`;
-      circle.style.top = `${y}px`;
+        placed.push({ x, y, size });
+        circle.style.left = `${x}px`;
+        circle.style.top = `${y}px`;
 
-      const dx = (Math.random() - 0.5) * 100;
-      const dy = (Math.random() - 0.5) * 100;
-      circle.animate(
-        [{ transform: "translate(0, 0)" }, { transform: `translate(${dx}px, ${dy}px)` }],
-        {
-          duration: 5000 + Math.random() * 2000,
-          direction: "alternate",
-          iterations: Infinity,
-          easing: "ease-in-out",
+        // Clear existing wandering animation before starting a new one
+        if (circle._wanderingAnimation) {
+          circle._wanderingAnimation.cancel();
         }
-      );
-    });
+
+        const dx = (Math.random() - 0.5) * 80;
+        const dy = (Math.random() - 0.5) * 80;
+        circle._wanderingAnimation = circle.animate(
+          [{ transform: "translate(0, 0)" }, { transform: `translate(${dx}px, ${dy}px)` }],
+          {
+            duration: 5000 + Math.random() * 2000,
+            direction: "alternate",
+            iterations: Infinity,
+            easing: "ease-in-out",
+          }
+        );
+      });
+    };
+
+    positionCircles();
+
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(positionCircles, 300);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(resizeTimer);
+    };
   }, []);
 
   return (
@@ -134,8 +158,6 @@ export default function Skills() {
               background: "rgba(0,255,255,0.12)",
             }}
             style={{
-              width: "110px",
-              height: "110px",
               borderRadius: "50%",
               position: "absolute",
               display: "flex",
@@ -153,8 +175,6 @@ export default function Skills() {
               src={s.logo}
               alt={s.name}
               style={{
-                width: "50px",
-                height: "50px",
                 objectFit: "contain",
                 filter: "drop-shadow(0 0 8px rgba(0,255,255,0.4)) brightness(1.2)",
                 marginBottom: "5px",

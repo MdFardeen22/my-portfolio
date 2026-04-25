@@ -7,20 +7,28 @@
   --glass: rgba(255,255,255,0.03);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
-*{box-sizing:border-box}
-html,body,#root{height:100%}
-body{
-  margin:0;
+* { box-sizing: border-box; }
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
   background: radial-gradient(800px 500px at 10% 10%, rgba(124,58,237,0.08), transparent 10%),
               radial-gradient(700px 400px at 90% 90%, rgba(255,92,161,0.04), transparent 10%),
               var(--bg);
-  color:#e6eef8;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
-  overflow-y:scroll;
+  color: #e6eef8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
-.app{min-height:100vh;display:flex;flex-direction:column}
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
 .footer{text-align:center;padding:20px;color:var(--muted);font-size:13px}
 
 /* Navbar */
@@ -55,7 +63,7 @@ body{
 .hero-cta{display:flex;gap:12px;margin-top:18px}
 
 /* projects */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:18px}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
 .project-card .ss{height:220px;border-radius:12px;overflow:hidden;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
 
 
@@ -99,6 +107,13 @@ body{
 
 
 /* responsive */
+.desktop-links {
+  display: flex;
+}
+.mobile-btn {
+  display: none;
+}
+
 @media (max-width:900px){
   .hero-hero{flex-direction:column;align-items:center;text-align:center;padding:24px}
   .hero-photo{width:260px;height:260px}
@@ -256,7 +271,7 @@ form h3 {
 
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
@@ -340,4 +355,19 @@ form h3 {
 .vote-btn.disagree:hover {
   background-color: #ff4c4c;
   color: #0b0e14;
+}
+
+@media (max-width: 768px) {
+  .desktop-links { display: none !important; }
+  .mobile-btn { display: block !important; }
+  .projects-card {
+    padding-top: 15px !important;
+  }
+  .hero-intro h1 { font-size: 32px; line-height: 1.1; margin-bottom: 12px; }
+  .hero-cta { flex-direction: column; width: 100%; gap: 16px; }
+  .hero-cta .btn, .hero-cta a, .hero-cta button { width: 100%; text-align: center; justify-content: center; display: flex; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 16px; margin: 16px auto; }
+  .blog-section { padding: 40px 16px; }
+  .blog-grid { grid-template-columns: 1fr; }
 }

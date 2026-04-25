@@ -1,0 +1,81 @@
+.resume-card {
+  background: #0b0b0b;
+  border-radius: 16px;
+  padding: 40px 30px;
+  color: #e5e5e5;
+  box-shadow: 0 0 25px rgba(0, 153, 255, 0.1);
+}
+
+.resume-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.resume-page {
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .resume-page {
+    padding-top: 10px; /* Matches the top padding vibe of Skills page */
+  }
+
+  .resume-card {
+    padding: 30px 15px;
+  }
+  
+  .resume-links {
+    gap: 15px;
+  }
+}
+
+/* Custom Download Button Styles (matching requested Tailwind design) */
+.download-btn {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  gap: 0.375rem;
+  padding: 0.8rem 1.6rem;
+  background-color: #00b4ff;
+  color: #fff;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 180, 255, 0.3);
+  transition: all 0.3s ease;
+  border: none;
+  align-items: center;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.download-btn:hover {
+  background-color: #0099cc;
+  box-shadow: 0 4px 20px rgba(0, 180, 255, 0.5);
+}
+
+.download-tooltip {
+  position: absolute;
+  opacity: 0;
+  top: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #f1f1f1;
+  font-size: 0.875rem;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover .download-tooltip {
+  opacity: 1;
+}
