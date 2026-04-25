@@ -71,6 +71,7 @@
 @media (max-width: 768px) {
   .home-section {
     padding-top: 15px;
+    gap: 0;
   }
 
   .home-info {
@@ -111,6 +112,10 @@
   .photo-ring {
     width: 220px;
     height: 220px;
+  }
+
+  .quick-links {
+    margin-top: 1.4rem;
   }
 
   .quick-links-list {
