@@ -4,14 +4,46 @@ import { Github, ExternalLink } from 'lucide-react'
 
 const PROJECTS = [
   {
-    title: '🏨 Hotel Management System',
-    desc: 'A full-stack hotel booking application for managing customer reservations operations, featuring CRUD operations and database management.',
-    ss: '/hotel-management.png', // Fallback or user needs to replace
-    tech: ['Python', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
-    live: '#',
-    code: 'https://github.com/MdFardeen22'
+    title: 'Hotel Management System DBMS',
+    desc: 'A full-stack hotel booking and database management application for handling customer reservations, billing, and staff operations efficiently.',
+    ss: 'https://placehold.co/600x400/1e293b/38bdf8?text=Hotel+Management',
+    tech: ['MySQL', 'HTML', 'CSS', 'JavaScript'],
+    live: 'https://github.com/MdFardeen22/Hotel_Management_System_DBMS',
+    code: 'https://github.com/MdFardeen22/Hotel_Management_System_DBMS'
+  },
+  {
+    title: 'Climate Change Modelling',
+    desc: 'A data science project analyzing global temperature trends and using predictive modeling to forecast future climate change scenarios.',
+    ss: 'https://placehold.co/600x400/1e293b/10b981?text=Climate+Modelling',
+    tech: ['Python', 'Pandas', 'Scikit-Learn', 'Matplotlib'],
+    live: 'https://github.com/MdFardeen22/Climate_Change_Modelling',
+    code: 'https://github.com/MdFardeen22/Climate_Change_Modelling'
+  },
+  {
+    title: 'SmartFit',
+    desc: 'A fitness application designed to track workouts, monitor progress, and provide personalized health recommendations to users.',
+    ss: 'https://placehold.co/600x400/1e293b/f43f5e?text=SmartFit',
+    tech: ['React.js', 'JavaScript', 'CSS'],
+    live: 'https://github.com/MdFardeen22/SmartFit',
+    code: 'https://github.com/MdFardeen22/SmartFit'
+  },
+  {
+    title: 'Heart Disease Diagnostic Analysis',
+    desc: 'Machine learning model built to predict the likelihood of heart disease in patients based on clinical parameters and medical history.',
+    ss: 'https://placehold.co/600x400/1e293b/ef4444?text=Heart+Disease+Analysis',
+    tech: ['Python', 'Jupyter', 'Machine Learning', 'Data Analysis'],
+    live: 'https://github.com/MdFardeen22/Heart-Disease_Diagnostic_Analysis',
+    code: 'https://github.com/MdFardeen22/Heart-Disease_Diagnostic_Analysis'
+  },
+  {
+    title: 'Drugs: Side Effects & Substitutes',
+    desc: 'A comprehensive medical dataset analysis tool for exploring 250k+ medicines, their uses, side effects, and available substitutes.',
+    ss: 'https://placehold.co/600x400/1e293b/8b5cf6?text=Drugs+Analysis',
+    tech: ['Python', 'Data Science', 'Pandas', 'Seaborn'],
+    live: 'https://github.com/MdFardeen22/250k_Medicines_Usage-_Side_Effects_and_Substitutes_Comprehensive_collection_of_medical_drugs',
+    code: 'https://github.com/MdFardeen22/250k_Medicines_Usage-_Side_Effects_and_Substitutes_Comprehensive_collection_of_medical_drugs'
   }
-]
+];
 
 export default function Projects() {
   return (
