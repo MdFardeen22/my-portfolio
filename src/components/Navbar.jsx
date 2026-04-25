@@ -48,14 +48,14 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <NavLink 
-          to="/" 
-          style={{ 
-            display: "flex", 
-            alignItems: "center", 
-            gap: 12, 
+        <NavLink
+          to="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
             textDecoration: "none",
-            color: "inherit" 
+            color: "inherit"
           }}
         >
           <motion.div
@@ -65,10 +65,10 @@ export default function Navbar() {
             transition={{ type: "spring", stiffness: 200 }}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <img 
-              src="/MFlogo.png" 
-              alt="MF Logo" 
-              style={{ width: "50px", height: "auto", objectFit: "contain" }} 
+            <img
+              src="/MFlogo.png"
+              alt="MF Logo"
+              style={{ width: "50px", height: "auto", objectFit: "contain" }}
             />
           </motion.div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -184,7 +184,7 @@ export default function Navbar() {
                 zIndex: 9998,
               }}
             />
-            
+
             {/* Sidebar Drawer */}
             <motion.div
               initial={{ x: "100%" }}

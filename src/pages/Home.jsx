@@ -82,7 +82,7 @@ export default function Home() {
           {/* Profession Tags */}
           <motion.div className="profession-tags">
             {professions.map((role, i) => (
-              <motion.div key={i} whileHover={{ scale: 1.04, background: 'linear-gradient(90deg,var(--accent),var(--accent-2))',color:"black"}} transition={{ type: 'spring', stiffness: 200 }} className="profession-tag">
+              <motion.div key={i} whileHover={{ scale: 1.04, background: 'linear-gradient(90deg,var(--accent),var(--accent-2))', color: "black" }} transition={{ type: 'spring', stiffness: 200 }} className="profession-tag">
                 {role}
               </motion.div>
             ))}
