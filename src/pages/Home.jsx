@@ -9,11 +9,11 @@ import photo from '../../public/photo.jpg'
 
 export default function Home() {
   const professions = [
-    'Associate Software Engineer',
-    'Frontend Developer',
-    'React Developer',
-    'Web Developer',
-    'React Native Developer'
+    'Full Stack Engineer',
+    'React & React Native Specialist',
+    'AI & ML Developer',
+    'Frontend Architect',
+    'Backend Systems Developer'
   ]
 
   return (
